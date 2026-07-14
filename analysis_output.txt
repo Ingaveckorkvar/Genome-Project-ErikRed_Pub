@@ -1,0 +1,211 @@
+________________________________________________________________________________
+PROTEIN SEQUENCE ANALYSIS REPORT
+________________________________________________________________________________
+
+[LOADING DATA]
+Loaded: 8 sequences
+Length: 105 positions
+
+________________________________________________________________________________
+SECTION 1: SEQUENCE COMPOSITION & STATISTICS
+________________________________________________________________________________
+
+               Species  Total length (with gaps)  Protein length (no gaps)  Gaps  Unique residues Most common AA
+          Homo_sapiens                       105                       105     0               20        K (Lys)
+        Equus_caballus                       105                       105     0               19        K (Lys)
+            Bos_taurus                       105                       105     0               20        K (Lys)
+         Gallus_gallus                       105                       105     0               20        K (Lys)
+       Pan_troglodytes                       105                       105     0               20        K (Lys)
+        Macaca_mulatta                       105                       105     0               20        K (Lys)
+Canis_lupus_familiaris                       105                       105     0               20        K (Lys)
+          Pan_paniscus                       105                       105     0               20        K (Lys)
+
+________________________________________________________________________________
+SECTION 2: PAIRWISE SEQUENCE IDENTITY (%)
+________________________________________________________________________________
+
+                        Homo_sapiens  Equus_caballus  Bos_taurus  Gallus_gallus  Pan_troglodytes  Macaca_mulatta  Canis_lupus_familiaris  Pan_paniscus
+Homo_sapiens                   100.0            88.6        90.5           87.6            100.0            99.0                    89.5         100.0
+Equus_caballus                  88.6           100.0        97.1           89.5             88.6            89.5                    94.3          88.6
+Bos_taurus                      90.5            97.1       100.0           91.4             90.5            91.4                    97.1          90.5
+Gallus_gallus                   87.6            89.5        91.4          100.0             87.6            88.6                    90.5          87.6
+Pan_troglodytes                100.0            88.6        90.5           87.6            100.0            99.0                    89.5         100.0
+Macaca_mulatta                  99.0            89.5        91.4           88.6             99.0           100.0                    90.5          99.0
+Canis_lupus_familiaris          89.5            94.3        97.1           90.5             89.5            90.5                   100.0          89.5
+Pan_paniscus                   100.0            88.6        90.5           87.6            100.0            99.0                    89.5         100.0
+
+________________________________________________________________________________
+SECTION 3: CONSERVATION ANALYSIS
+________________________________________________________________________________
+
+Entropy statistics:
+  Mean entropy:  0.150 bits (average variability)
+  Max entropy:   1.750 bits (most variable position)
+  Min entropy:   0.000 bits (most conserved position)
+
+--- Most Conserved Positions (likely functionally critical) ---
+  Position 1: entropy=0.000, composition={'M': 8}
+  Position 2: entropy=0.000, composition={'G': 8}
+  Position 3: entropy=0.000, composition={'D': 8}
+  Position 5: entropy=0.000, composition={'E': 8}
+  Position 6: entropy=0.000, composition={'K': 8}
+
+--- Most Variable Positions (probably on surface/loop regions) ---
+  Position 51: entropy=1.000, composition={'A': 4, 'D': 4}
+  Position 84: entropy=1.000, composition={'V': 4, 'A': 4}
+  Position 104: entropy=1.061, composition={'N': 6, 'S': 1, 'K': 1}
+  Position 93: entropy=1.299, composition={'A': 5, 'E': 2, 'V': 1}
+  Position 90: entropy=1.750, composition={'E': 4, 'T': 1, 'G': 2, 'S': 1}
+
+________________________________________________________________________________
+SECTION 4: PHYLOGENETIC ANALYSIS
+________________________________________________________________________________
+
+Distance matrix (% difference between sequences):
+Homo_sapiens    0.000000
+Equus_caballus  0.114286    0.000000
+Bos_taurus  0.095238    0.028571    0.000000
+Gallus_gallus   0.123810    0.104762    0.085714    0.000000
+Pan_troglodytes 0.000000    0.114286    0.095238    0.123810    0.000000
+Macaca_mulatta  0.009524    0.104762    0.085714    0.114286    0.009524    0.000000
+Canis_lupus_familiaris  0.104762    0.057143    0.028571    0.095238    0.104762    0.095238    0.000000
+Pan_paniscus    0.000000    0.114286    0.095238    0.123810    0.000000    0.009524    0.104762    0.000000
+    Homo_sapiens    Equus_caballus  Bos_taurus  Gallus_gallus   Pan_troglodytes Macaca_mulatta  Canis_lupus_familiaris  Pan_paniscus
+
+___ UPGMA Tree (assumes constant mutation rate) ___
+        _______________________________________________ Gallus_gallus
+       |
+  _____|                                  _____________ Canis_lupus_familiaris
+ |     |                           ______|
+ |     |__________________________|      |_____________ Bos_taurus
+ |                                |
+_|                                |____________________ Equus_caballus
+ |
+ |                                                 ____ Macaca_mulatta
+ |                                                |
+ |________________________________________________|    , Pan_paniscus
+                                                  |    |
+                                                  |____| Pan_troglodytes
+                                                       |
+                                                       | Homo_sapiens
+
+
+___ Neighbor-Joining Tree (no rate assumption) ___
+ , Homo_sapiens
+ |
+ |   , Macaca_mulatta
+ |___|
+ |   |                         ________________________ Gallus_gallus
+ |   |________________________|
+ |                            |       ________ Canis_lupus_familiaris
+_|                            |______|
+ |                                   |   _ Bos_taurus
+ |                                   |__|
+ |                                      |__________ Equus_caballus
+ |
+ | Pan_troglodytes
+ |
+ | Pan_paniscus
+
+
+________________________________________________________________________________
+SECTION 5: AMINO ACID COMPOSITION & FREQUENCY
+________________________________________________________________________________
+
+Amino acid frequencies in Homo_sapiens (w/o gaps):
+AA   Code  Count    Frequency   
+------------------------------
+K    Lys   18         17.1%
+G    Gly   13         12.4%
+E    Glu   8           7.6%
+I    Ile   8           7.6%
+T    Thr   7           6.7%
+L    Leu   6           5.7%
+A    Ala   6           5.7%
+N    Asn   5           4.8%
+Y    Tyr   5           4.8%
+M    Met   4           3.8%
+P    Pro   4           3.8%
+D    Asp   3           2.9%
+V    Val   3           2.9%
+F    Phe   3           2.9%
+H    His   3           2.9%
+C    Cys   2           1.9%
+S    Ser   2           1.9%
+Q    Gln   2           1.9%
+R    Arg   2           1.9%
+W    Trp   1           1.0%
+
+________________________________________________________________________________
+SECTION 6: TRANSITION/TRANSVERSION RATIO
+________________________________________________________________________________
+
+(Protein sequence -- Ts/Tv N/A)
+
+________________________________________________________________________________
+SECTION 7: SUMMARY VISUALIZATIONS
+________________________________________________________________________________
+
+Figure saved: protein_analysis_summary.png
+
+Figure saved: pairwise_identity_heatmap.png (sized for 8 species)
+
+________________________________________________________________________________
+SECTION 8: ISOELECTRIC POINT & HYDROPHOBICITY PROFILE
+________________________________________________________________________________
+
+Species                       pI     MW (Da)    GRAVY  Charge type
+______________________________________________________________________
+Homo_sapiens                9.59     11748.6   -0.706  Basic
+Equus_caballus              9.59     11832.6   -0.875  Basic
+Bos_taurus                  9.52     11703.4   -0.840  Basic
+Gallus_gallus               9.52     11710.4   -0.785  Basic
+Pan_troglodytes             9.59     11748.6   -0.706  Basic
+Macaca_mulatta              9.59     11736.5   -0.755  Basic
+Canis_lupus_familiaris      9.61     11632.4   -0.763  Basic
+Pan_paniscus                9.59     11748.6   -0.706  Basic
+
+INTERPRETATION:
+  pI < 7    -> acidic protein (net negative charge at neutral pH)
+  pI > 7    -> basic protein (net positive charge at neutral pH)
+  GRAVY > 0 -> overall hydrophobic (unusual for a soluble protein)
+  GRAVY < 0 -> overall hydrophilic (typical for a soluble, water-based protein)
+
+
+Figure saved: hydrophobicity_profile.png
+
+________________________________________________________________________________
+FINAL SUMMARY
+________________________________________________________________________________
+
+ANALYSIS COMPLETE. Key findings:
+
+1. SEQUENCE IDENTITY:
+   Mean pairwise identity: 92.3%
+   -> Higher identity indicates closer evolutionary relationships
+   -> Lower identity indicates more distant divergence
+
+2. CONSERVATION:
+   Mean position entropy: 0.15 bits
+   Most conserved position: 1 (entropy=0.000)
+   -> Conserved positions are under strong selective constraint
+   -> Variable positions may be less functionally critical
+
+3. PHYLOGENETIC RELATIONSHIPS:
+   The tree shows 8 sequences clustered by evolutionary distance.
+   UPGMA assumes constant mutation rate; Neighbor-Joining does not.
+   If both trees show similar topology, results are robust.
+
+4. AMINO ACID COMPOSITION:
+   Analysis based on 105 residues (gaps excluded).
+   Most common: K (Lys) at 17.1%
+
+5. NOTE ON GAPS:
+   Total alignment positions: 105
+   Gaps in first sequence: 0
+   Gaps are EXCLUDED from amino acid composition (they're not amino acids).
+   Gaps are INCLUDED in entropy analysis (they have evolutionary meaning).
+
+________________________________________________________________________________
+Analysis finished. All plots saved and printed.
+________________________________________________________________________________
