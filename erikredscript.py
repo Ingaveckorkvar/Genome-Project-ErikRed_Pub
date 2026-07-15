@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from time import sleep
 import sys
+#imports everything i need to run stuff
 
 class Tee:
     def __init__(self, filename):
@@ -24,6 +25,7 @@ def write(self, message):
         self.log.flush()
         
 sys.stdout = Tee("analysis_output.txt")
+#text file produced with terminal outputs, as with large datasets text can be lost
 
 AA_CODE = {
     'A': 'Ala', 'C': 'Cys', 'D': 'Asp', 'E': 'Glu', 'F': 'Phe', 'G': 'Gly',
@@ -31,23 +33,24 @@ AA_CODE = {
     'P': 'Pro', 'Q': 'Gln', 'R': 'Arg', 'S': 'Ser', 'T': 'Thr', 'V': 'Val',
     'W': 'Trp', 'Y': 'Tyr', '-': 'Gap'
 }
+#translates fasta one letter AA codes to 3 letter codes; easier to read
 
 print("_"*80)
 print("PROTEIN SEQUENCE ANALYSIS REPORT")
 print("_"*80)
 
-print("\n[LOADING DATA]")
+print("\n[LOADING DATA]") #looks cool lol
 
-alignment = AlignIO.read("_temp_alignment.fasta", "fasta-pearson")
+alignment = AlignIO.read("_temp_alignment.fasta", "fasta-pearson") #reads the file, "fasta-pearson" is the format, change between fasta-pearson, fasta & clustal
 
 print(f"Loaded: {len(alignment)} sequences")
 print(f"Length: {alignment.get_alignment_length()} positions")
 
 print("\n" + "_"*80)
-print("SECTION 1: SEQUENCE COMPOSITION & STATISTICS")
+print("SECTION 1: SEQUENCE COMPOSITION & STATISTICS") #we gotta look cool.
 print("_"*80)
 
-sleep(1)
+sleep(1) #just so my laptop doesnt explode, though i suspect these dont do much.
 
 comp_data = []
 for record in alignment:
@@ -63,12 +66,12 @@ for record in alignment:
         "Gaps": seq_str.count("-"),
         "Unique residues": len(aa_counts),
         "Most common AA": f"{most_common_aa} ({AA_CODE.get(most_common_aa, '?')})"
-    })
+    }) # common protein data really, self explanatory.
 
 comp_df = pd.DataFrame(comp_data)
 print("\n" + comp_df.to_string(index=False))
 
-sleep(1)
+sleep(1) #why did i bother adding this
 
 print("\n" + "_"*80)
 print("SECTION 2: PAIRWISE SEQUENCE IDENTITY (%)")
@@ -78,9 +81,11 @@ def pairwise_identity(seq1, seq2):
     matches = sum(1 for a, b in zip(seq1, seq2) if a == b)
     return (matches / len(seq1) * 100) if len(seq1) > 0 else 0
 
+
 species_list = [str(record.seq) for record in alignment]
 species_names = [record.id for record in alignment]
 identity_matrix = np.zeros((len(species_list), len(species_list)))
+
 
 for i in range(len(species_list)):
     for j in range(len(species_list)):
@@ -97,7 +102,7 @@ print("SECTION 3: CONSERVATION ANALYSIS")
 print("_"*80)
 
 def shannon_entropy(column, ignore_gaps=False):
-    # Formula: H = -sum(p_i * log2(p_i)), where p_i = frequency of residue i
+    # formula where h is entropy: H = -sum(p_i * log2(p_i)), where p_i = frequency of residue i
     if ignore_gaps:
         column = column.replace("-", "")
         if len(column) == 0:
@@ -145,7 +150,7 @@ for i in most_variable:
 sleep(1)
 
 print("\n" + "_"*80)
-print("SECTION 4: PHYLOGENETIC ANALYSIS")
+print("SECTION 4: PHYLOGENETIC TREE")
 print("_"*80)
 
 calculator = DistanceCalculator("identity")
@@ -156,7 +161,7 @@ print(distance_matrix)
 #top 2 functions hide data due to v. large data set. disable/enable to see additional data. terminal has char. limit
 
 constructor = DistanceTreeConstructor()
-tree_upgma = constructor.upgma(distance_matrix)
+tree_upgma = constructor.upgma(distance_matrix) #constructs trees using distance matrix produced
 tree_nj = constructor.nj(distance_matrix)
 
 for clade in tree_upgma.get_nonterminals():
@@ -164,10 +169,10 @@ for clade in tree_upgma.get_nonterminals():
 for clade in tree_nj.get_nonterminals():
     clade.name = None
 
-print("\n___ UPGMA Tree (assumes constant mutation rate) ___")
+print("\n___ UPGMA Tree (assumes constant mutation rate) ___") #classical phylogenetic tree im used to
 Phylo.draw_ascii(tree_upgma)
 
-print("\n___ Neighbor-Joining Tree (no rate assumption) ___")
+print("\n___ Neighbor-Joining Tree (no rate assumption) ___") #weird phylogenetic tree, both equally informative though.
 Phylo.draw_ascii(tree_nj)
 
 sleep(1)
@@ -221,9 +226,10 @@ if is_dna and len(species_list) > 1:
     for i in range(len(species_list) - 1):
         for j in range(i + 1, len(species_list)):
             ts, tv, ratio = count_subs(species_list[i], species_list[j])
-            print(f"  {species_names[i]} vs {species_names[j]}: Ts/Tv = {ratio:.2f} (Ts={ts}, Tv={tv})")
+            print(f"  {species_names[i]} vs {species_names[j]}: Ts/Tv = {ratio:.2f} (Ts={ts}, Tv={tv})") 
 else:
     print("\n(Protein sequence -- Ts/Tv N/A)")
+    # TS.TV similarly used in phylogenetics
 
 sleep(1)
 
@@ -265,7 +271,7 @@ print("\nFigure saved: protein_analysis_summary.png")
 
 num_species = len(species_names)
 heatmap_size = max(8, num_species * 0.45)
-heatmap_fontsize = max(4, min(11, 220 / num_species))
+heatmap_fontsize = max(4, min(11, 220 / num_species)) 
 
 fig2, ax2 = plt.subplots(figsize=(heatmap_size, heatmap_size))
 im = ax2.imshow(identity_matrix, cmap='YlGn', aspect='auto', vmin=0, vmax=100)
@@ -273,7 +279,7 @@ ax2.set_xticks(range(num_species))
 ax2.set_yticks(range(num_species))
 ax2.set_xticklabels(species_names, rotation=45, ha='right', fontsize=heatmap_fontsize)
 ax2.set_yticklabels(species_names, fontsize=heatmap_fontsize)
-ax2.set_title(f"Pairwise Identity (%) -- {num_species} sequences\n(Brighter = More Similar)",
+ax2.set_title(f"Pairwise Identity (%) -- {num_species} sequences\n(Darker = More Similar)",
               fontsize=13, fontweight='bold')
 ax2.set_xticks(np.arange(-0.5, num_species, 1), minor=True)
 ax2.set_yticks(np.arange(-0.5, num_species, 1), minor=True)
@@ -283,7 +289,7 @@ cbar2 = plt.colorbar(im, ax=ax2, fraction=0.046, pad=0.04)
 cbar2.set_label('Identity %', fontsize=10)
 plt.tight_layout()
 plt.savefig("pairwise_identity_heatmap.png", dpi=300, bbox_inches='tight')
-print(f"\nFigure saved: pairwise_identity_heatmap.png (sized for {num_species} species)")
+print(f"\nFigure saved: pairwise_identity_heatmap.png (sized for {num_species} species)") 
 
 sleep(1)
 
@@ -308,13 +314,13 @@ for record in alignment:
 
     analysis = ProteinAnalysis(seq_no_gaps)
     pi = analysis.isoelectric_point()
-    mw = analysis.molecular_weight()
+    mw = analysis.molecular_weight() 
     gravy = analysis.gravy()
-    charge_type = "Basic" if pi > 7 else "Acidic"
+    charge_type = "Basic" if pi > 7 else "Acidic" #duh
 
     hydrophobicity_profiles[record.id] = analysis.protein_scale(kd, window=WINDOW)
 
-    print(f"{record.id:<25} {pi:>6.2f}  {mw:>10.1f}  {gravy:>7.3f}  {charge_type}")
+    print(f"{record.id:<25} {pi:>6.2f}  {mw:>10.1f}  {gravy:>7.3f}  {charge_type}") #prints as a table. very neat and tidy imo
 
 print("""
 INTERPRETATION:
@@ -322,9 +328,9 @@ INTERPRETATION:
   pI > 7    -> basic protein (net positive charge at neutral pH)
   GRAVY > 0 -> overall hydrophobic (unusual for a soluble protein)
   GRAVY < 0 -> overall hydrophilic (typical for a soluble, water-based protein)
-""")
+""") #interpretation as i didnt really understand the concept of GRAVY/pI when i first started using this. still useful tbh
 
-# --- plot the hydrophobicity profile for the first sequence in the alignment ---
+# plot the hydrophobicity profile for the first sequence in the alignment
 first_id = alignment[0].id
 profile = hydrophobicity_profiles[first_id]
 half_window = WINDOW // 2
@@ -333,12 +339,12 @@ positions = range(half_window + 1, half_window + 1 + len(profile))
 plt.figure(figsize=(12, 5))
 plt.plot(positions, profile, color='darkorange', linewidth=1.5)
 plt.axhline(0, color='black', linewidth=1)
-plt.fill_between(positions, profile, 0, where=[p > 0 for p in profile],
+plt.fill_between(positions, profile, 0, where=[p > 0 for p in profile], #fills in the position, so its not just a line
                   color='sandybrown', alpha=0.5, label='Hydrophobic')
-plt.fill_between(positions, profile, 0, where=[p <= 0 for p in profile],
+plt.fill_between(positions, profile, 0, where=[p <= 0 for p in profile], #likewise, but for positions below
                   color='skyblue', alpha=0.5, label='Hydrophilic')
-plt.xlabel("Residue position", fontsize=11)
-plt.ylabel("Kyte-Doolittle score (window average)", fontsize=11)
+plt.xlabel("Residue position", fontsize=11) 
+plt.ylabel("Kyte-Doolittle score (window average)", fontsize=11) #labels, self explanatory
 plt.title(f"Hydrophobicity Profile -- {first_id}\n(Window size = {WINDOW})",
           fontsize=12, fontweight='bold')
 plt.legend()
@@ -387,4 +393,4 @@ print("_"*80)
 print("Analysis finished. All plots saved and printed.")
 print("_"*80)
 
-plt.show()
+plt.show() #all plots are only shown at the end for simplicity, makes it especially "modular" as i dont need to constantly remove and replace if i add new things using matplotlib
