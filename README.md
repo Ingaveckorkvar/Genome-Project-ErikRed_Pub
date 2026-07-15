@@ -22,3 +22,7 @@ ErikRed is a basic script that can read FASTA/CLUSTAL files and produce a "repor
 - AA Composition of the protein
 - ErikRed can also save all terminal outputs to a .txt file for large datasets.
 - All graphs produced by ErikRed are saved in the same folder.
+
+### Credit where it's due
+Big thank you to my friend, Matt Bergström, who helped me on this. I am nowhere near this level and could never accomplish this completely solo.
+Likewise credit is due to biopython documentation, various forums and rosalind for helping me get somewhere.
